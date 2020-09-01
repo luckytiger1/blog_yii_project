@@ -109,10 +109,10 @@ class Article extends \yii\db\ActiveRecord
             ->viaTable('article_tag', ['article_id' => 'id']);
     }
 
-    public function getSelectedTags()
+    public function getSelectedTags($type = 'id')
     {
-        $selectedIds = $this->getTags()->select('id')->asArray()->all();
-        return ArrayHelper::getColumn($selectedIds, 'id');
+        $selectedIds = $this->getTags()->select($type)->asArray()->all();
+        return ArrayHelper::getColumn($selectedIds, $type);
     }
 
     public function saveTags($tags)
